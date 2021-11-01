@@ -1,4 +1,5 @@
-import {User} from "../Types/User";
+import {User} from "../Types/User"
+}
 
 export async function getPost(id: number) {
     const response = await fetch('http://localhost:8080/posts/' + id, {
