@@ -1,4 +1,19 @@
 import {User} from "../Types/User"
+import {Post} from "../Types/Post"
+
+export async function createPost(post: Post) {
+    const response = await fetch('http://localhost.fiddler:8080/posts/', {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
 }
 
 export async function getPost(id: number) {

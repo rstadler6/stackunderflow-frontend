@@ -3,16 +3,16 @@ import {Post} from "../../Types/Post";
 import {createPost, isEmptyOrWhitespace} from "../../Api/Api";
 
 export default function CreatePost(props: { setLoaded: (loaded: boolean) => void }) {
-    let checkIn: string;
-    let checkOut: string;
+    let title: string;
+    let content: string;
 
     return (<div>
             <form acceptCharset="utf-8" onSubmit={e => preventFormReturn(e)}>
                 <label>
-                    <input onInput={e => setCheckInEvent(e)} type="datetime-local" name="checkin"
+                    <input onInput={e => setCheckInEvent(e)} type="text" name="title"
                            required/>
                     <br/><br/>
-                    <input onInput={e => setCheckOutEvent(e)} type="datetime-local" name="checkout"
+                    <input onInput={e => setCheckOutEvent(e)} type="text" name="content"
                            required/>
                     <br/><br/>
                     <button type="button" onClick={createPostEvent}>Create Post</button>
@@ -22,22 +22,22 @@ export default function CreatePost(props: { setLoaded: (loaded: boolean) => void
 
     function setCheckInEvent(e: FormEvent<HTMLInputElement>) {
         let element = e.target as HTMLInputElement;
-        checkIn = element.value;
+        title = element.value;
     }
 
     function setCheckOutEvent(e: FormEvent<HTMLInputElement>) {
         let element = e.target as HTMLInputElement
-        checkOut = element.value;
+        content = element.value;
     }
 
     async function createPostEvent(e: React.MouseEvent) {
-        if (isEmptyOrWhitespace(checkIn) || isEmptyOrWhitespace(checkOut)) {
+        if (isEmptyOrWhitespace(title) || isEmptyOrWhitespace(content)) {
             alert("CheckIn and CheckOut are mandatory")
             return;
         }
 
         try {
-            const post = new Post(new Date(checkIn), new Date(checkOut));
+            const post = new Post(title, content);
             await createPost(post);
             props.setLoaded(false);
         } catch (e) {

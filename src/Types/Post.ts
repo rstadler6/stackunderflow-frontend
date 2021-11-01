@@ -2,14 +2,16 @@ import {User} from "./User";
 import {Comment} from "./Comment";
 
 export class Post {
-    constructor(checkOut: Date, checkIn: Date) {
-        this.checkOut = checkOut;
-        this.checkIn = checkIn;
+    constructor(title: string, content: string) {
+        this.title = title;
+        this.content = content;
     }
 
     id: number;
     user: User;
-    checkOut: Date;
-    checkIn: Date;
+    title: string;
+    content: string;
+    timestamp: Date;
+    upvotes: Number;
     comments: Comment[];
 }
