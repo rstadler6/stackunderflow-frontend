@@ -1,5 +1,19 @@
 import {User} from "../Types/User";
 
+export async function getPost(id: number) {
+    const response = await fetch('http://localhost:8080/posts/' + id, {
+        method: "GET",
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
+}
+
 export async function getPosts() {
     const response = await fetch('http://localhost:8080/posts/', {
         method: "GET",
