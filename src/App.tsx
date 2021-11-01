@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import './App.css';
+import Home from "./Home";
+import Login from "./Components/Login/Login";
+import Header from "./Components/Header/Header";
 
 function App() {
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt") == null ? "" : localStorage.getItem("jwt"))
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <Router>
+        {jwt === "" ? <Login setJwt={setJwt}/>
+            : <div>
+              <Route path="/" render={props => <Header setJwt={setJwt} {...props} />}/>
+              <div>
+                <Switch>
+                  <Route exact path="/" component={Home}/>
+                </Switch>
+              </div>
+            </div>
+        }
+      </Router>
+  )
 }
 
 export default App;
