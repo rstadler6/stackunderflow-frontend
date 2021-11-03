@@ -4,6 +4,7 @@ import './App.css';
 import Home from "./Home";
 import Login from "./Components/Login/Login";
 import Header from "./Components/Header/Header";
+import CreatePost from "./Components/CreatePost/CreatePost";
 
 function App() {
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") == null ? "" : localStorage.getItem("jwt"))
@@ -16,6 +17,7 @@ function App() {
               <div>
                 <Switch>
                   <Route exact path="/" component={Home}/>
+                  <Route exact path="/posts/create" component={CreatePost}/>
                 </Switch>
               </div>
             </div>

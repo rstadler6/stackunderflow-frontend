@@ -17,7 +17,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
 
     function showPosts() {
         return posts.map(post =>
-           <div>{post.checkOut}, {post.checkIn}</div>);
+           <div>{post.title}, {post.user}</div>);
     }
 
     async function initPosts() {

@@ -98,7 +98,7 @@ export async function deleteUser(username: string) {
 }
 
 export async function login(username: string, password: string) {
-    const response = await fetch('http://localhost:8080/auth/login', {
+    /*const response = await fetch('http://localhost:8080/auth/login', {
         method: "POST",
         body: JSON.stringify(new User(username, password, false, false)),
         headers: new Headers({'content-type': 'application/json'})
@@ -109,7 +109,9 @@ export async function login(username: string, password: string) {
     }
 
     localStorage.setItem('jwt', await response.text());
-    await adminCheck(username);
+    await adminCheck(username);*/
+
+    localStorage.setItem('jwt', "123"); // temp
 }
 
 export async function register(username: string, password: string) {

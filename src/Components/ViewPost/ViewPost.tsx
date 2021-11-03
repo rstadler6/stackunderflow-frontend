@@ -20,7 +20,7 @@ export default function ViewPost() {
     )
 
     function showPost() {
-        return (<div>{post.checkIn} {post.checkOut}<Comments post={post}/></div>)
+        return (<div>{post.title} {post.user}<Comments post={post}/></div>)
     }
 
     async function initPost() {

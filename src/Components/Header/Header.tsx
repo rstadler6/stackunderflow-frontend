@@ -4,9 +4,8 @@ import {Link} from "react-router-dom";
 export default function Header(props: { setJwt: (content: string) => void }) {
     return (
         <div>
-            <Link to="/"><button>Entries</button></Link>
-            <Link to="/categories"><button>Categories</button></Link>
-            <Link to="/users"><button>Users</button></Link>
+            <Link to="/"><button>Home</button></Link>
+            <Link to="/posts/create"><button>New Post</button></Link>
             <button onClick={logout}>Logout</button>
         </div>
     )

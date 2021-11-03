@@ -75,7 +75,7 @@ export default function CommentBox(props: { setJwt: (content: string) => void })
         const jwt = localStorage.getItem("jwt");
 
         if (jwt == null) {
-            alert("CommentBox failed, JWT empty");
+            alert("Register failed, JWT empty");
             return;
         }
 
