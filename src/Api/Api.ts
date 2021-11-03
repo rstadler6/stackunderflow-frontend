@@ -30,8 +30,8 @@ export async function getPost(id: number) {
     return await response.json();
 }
 
-export async function getPosts() {
-    const response = await fetch('http://localhost:8080/posts/', {
+export /*async*/ function getPosts() {
+    /*const response = await fetch('http://localhost:8080/posts/', {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
@@ -42,7 +42,8 @@ export async function getPosts() {
         alert(response.statusText)
     }
 
-    return await response.json();
+    return await response.json();*/
+    return [new Post("muck", "MUCK")]; // temp
 }
 
 export async function getUsers() {

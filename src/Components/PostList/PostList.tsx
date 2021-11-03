@@ -17,11 +17,11 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
 
     function showPosts() {
         return posts.map(post =>
-           <div>{post.title}, {post.user}</div>);
+            <div>{post.title}, {post.user} <button>upvote</button><button>downvote</button></div>);
     }
 
     async function initPosts() {
-        setPosts(await getPosts());
+        setPosts(/*await*/ getPosts());
         props.setLoaded(true);
     }
 }
