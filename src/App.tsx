@@ -5,6 +5,7 @@ import Home from "./Home";
 import Login from "./Components/Login/Login";
 import Header from "./Components/Header/Header";
 import CreatePost from "./Components/CreatePost/CreatePost";
+import ViewPost from "./Components/ViewPost/ViewPost";
 
 function App() {
   const [jwt, setJwt] = useState(localStorage.getItem("jwt") == null ? "" : localStorage.getItem("jwt"))
@@ -18,6 +19,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Home}/>
                   <Route exact path="/posts/create" component={CreatePost}/>
+                  <Route path="/posts/:id"  component={ViewPost}/>
                 </Switch>
               </div>
             </div>

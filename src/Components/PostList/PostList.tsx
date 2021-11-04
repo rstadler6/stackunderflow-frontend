@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
 import {Post} from "../../Types/Post";
 import {getPosts} from "../../Api/Api";
 
@@ -17,7 +18,10 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
 
     function showPosts() {
         return posts.map(post =>
-            <div>{post.title}, {post.user} <button>upvote</button><button>downvote</button></div>);
+            <div>
+                <Link to={"/posts/" + post.id} type="button">{post.title}, {post.user}</Link>
+                <button>upvote</button><button>downvote</button>
+            </div>);
     }
 
     async function initPosts() {
