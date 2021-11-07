@@ -32,7 +32,7 @@ export default function CreatePost(props: { setLoaded: (loaded: boolean) => void
 
     async function createPostEvent(e: React.MouseEvent) {
         if (isEmptyOrWhitespace(title) || isEmptyOrWhitespace(content)) {
-            alert("CheckIn and CheckOut are mandatory")
+            alert("Title and Content are mandatory")
             return;
         }
 

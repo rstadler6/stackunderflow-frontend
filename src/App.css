@@ -30,3 +30,8 @@ ul {
 .card-text {
   font-size: 1vw;
 }
+
+a {
+  color: black !important;
+  text-decoration: none !important;
+}

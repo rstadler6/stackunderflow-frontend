@@ -5,6 +5,7 @@ import {createPost, getPosts, isEmptyOrWhitespace, votePost} from "../../Api/Api
 
 export default function PostList(props: { loaded: boolean, setLoaded: (loaded: boolean) => void }) {
     const [posts, setPosts] = useState<Post[]>([]);
+    const newestFirst = useState(true);
 
     useEffect(() => {
         initPosts();
@@ -25,10 +26,10 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
                             <p className="card-user">{post.user}</p>
                             <p className="card-title">{post.title}</p>
                             <p className="card-text">{post.content}</p>
+                            <button onClick={e => voteEvent(e, post.id, 1)}>upvote</button> 0 <button onClick={e => voteEvent(e, post.id, -1)}>downvote</button>
                         </div>
                     </div>
                 </Link>
-                <button>upvote</button> 0 <button>downvote</button>
             </li>);
     }
 
@@ -37,24 +38,17 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
         props.setLoaded(true);
     }
 
-    async function upvoteEvent(e: React.MouseEvent, id: number) {
+    async function voteEvent(e: React.MouseEvent, id: number, value: number) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+
         try {
             await votePost(id, 1);
             props.setLoaded(false);
         } catch (e) {
             // @ts-ignore
             alert("Upvote post failed: " + e.message);
-            return;
-        }
-    }
-
-    async function dovnvoteEvent(e: React.MouseEvent, id: number) {
-        try {
-            await votePost(id, -1);
-            props.setLoaded(false);
-        } catch (e) {
-            // @ts-ignore
-            alert("Downvote post failed: " + e.message);
             return;
         }
     }
