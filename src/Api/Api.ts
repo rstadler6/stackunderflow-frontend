@@ -46,6 +46,21 @@ export /*async*/ function getPosts() {
     return [new Post("muck", "MUCK")]; // temp
 }
 
+export async function votePost(id: number, value: number) {
+    const response = await fetch('http://localhost:8080/posts/' + id + '/vote', {
+        method: "POST",
+        body: JSON.stringify(id),
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
+}
+
 export async function getUsers() {
     const response = await fetch('http://localhost:8080/users/', {
         method: "GET",

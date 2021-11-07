@@ -9,16 +9,16 @@ export default function CommentBox(props: { setJwt: (content: string) => void })
         <div>
             <form acceptCharset="utf-8">
                 <label>
-                    <input value={username}
+                    <input value={username} className="form-control-lg form-control input"
                            onInput={e => setUsernameEvent(e)} type="text" name="username"
                            placeholder="Username" required/>
                     <br/><br/>
-                    <input value={password}
+                    <input value={password} className="form-control-lg form-control input"
                            onInput={e => setPasswordEvent(e)} type="password" name="password"
                            placeholder="Password" required/>
                     <br/><br/>
-                    <button onClick={loginEvent} type="button" name="login">Login</button>
-                    <button onClick={registerEvent} type="button" name="register">Register</button>
+                    <button onClick={loginEvent} type="button" name="login" className="btn btn-primary login">Login</button>
+                    <button onClick={registerEvent} type="button" name="register" className="btn btn-primary login">Register</button>
                 </label>
             </form>
         </div>
