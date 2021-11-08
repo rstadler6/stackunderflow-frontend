@@ -6,6 +6,8 @@ export class Comment {
         this.content = content;
     }
 
+    id: number;
+    upvotes: number;
     user: User;
     content: String
 }

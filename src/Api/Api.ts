@@ -16,8 +16,23 @@ export async function createPost(post: Post) {
     return await response.json();
 }
 
+export async function commentPost(id: number, comment: Comment) {
+    const response = await fetch('http://localhost.fiddler:5000/posts/' + id + '/comment', {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
+}
+
 export async function getPost(id: number) {
-    const response = await fetch('http://localhost:5000/posts/' + id, {
+    const response = await fetch('http://localhost.fiddler:5000/posts/' + id, {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
@@ -45,7 +60,7 @@ export async function getPosts() {
     return await response.json();
 }
 
-export async function votePost(id: number, value: number) {
+export async function voteComment(id: number, value: number) {
     const response = await fetch('http://localhost:5000/posts/' + id + '/vote', {
         method: "POST",
         body: JSON.stringify(id),
