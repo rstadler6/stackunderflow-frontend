@@ -2,7 +2,7 @@ import {User} from "../Types/User"
 import {Post} from "../Types/Post"
 
 export async function createPost(post: Post) {
-    const response = await fetch('http://localhost:30631/posts/', {
+    const response = await fetch('http://localhost:5000/posts/', {
         method: "POST",
         body: JSON.stringify(post),
         headers: new Headers(
@@ -17,7 +17,7 @@ export async function createPost(post: Post) {
 }
 
 export async function getPost(id: number) {
-    const response = await fetch('http://localhost:30631/posts/' + id, {
+    const response = await fetch('http://localhost:5000/posts/' + id, {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
@@ -47,7 +47,7 @@ export /*async*/ function getPosts() {
 }
 
 export async function votePost(id: number, value: number) {
-    const response = await fetch('http://localhost:30631/posts/' + id + '/vote', {
+    const response = await fetch('http://localhost:5000/posts/' + id + '/vote', {
         method: "POST",
         body: JSON.stringify(id),
         headers: new Headers(
@@ -62,7 +62,7 @@ export async function votePost(id: number, value: number) {
 }
 
 export async function getUsers() {
-    const response = await fetch('http://localhost:30631/users/', {
+    const response = await fetch('http://localhost:5000/users/', {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
@@ -77,7 +77,7 @@ export async function getUsers() {
 }
 
 export async function createUser(user: User) {
-    const response = await fetch('http://localhost:30631/users/', {
+    const response = await fetch('http://localhost:5000/users/', {
         method: "POST",
         body: JSON.stringify(user),
         headers: new Headers({'content-type': 'application/json'})
@@ -89,7 +89,7 @@ export async function createUser(user: User) {
 }
 
 export async function updateUser(user: User) {
-    const response = await fetch('http://localhost:30631/users/', {
+    const response = await fetch('http://localhost:5000/users/', {
         method: "PUT",
         body: JSON.stringify(user),
         headers: new Headers({'content-type': 'application/json'})
@@ -101,7 +101,7 @@ export async function updateUser(user: User) {
 }
 
 export async function deleteUser(username: string) {
-    const response = await fetch('http://localhost:30631/users/' + username, {
+    const response = await fetch('http://localhost:5000/users/' + username, {
         method: "DELETE",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
@@ -114,7 +114,7 @@ export async function deleteUser(username: string) {
 }
 
 export async function login(username: string, password: string) {
-    /*const response = await fetch('http://localhost:30631/auth/login', {
+    /*const response = await fetch('http://localhost:5000/auth/login', {
         method: "POST",
         body: JSON.stringify(new User(username, password, false, false)),
         headers: new Headers({'content-type': 'application/json'})
@@ -131,7 +131,7 @@ export async function login(username: string, password: string) {
 }
 
 export async function register(username: string, password: string) {
-    const response = await fetch('http://localhost:30631/auth/register', {
+    const response = await fetch('http://localhost:5000/auth/register', {
         method: "POST",
         body: JSON.stringify(new User(username, password, false, false)),
         headers: new Headers({'content-type': 'application/json'})
@@ -146,7 +146,7 @@ export async function register(username: string, password: string) {
 }
 
 export async function adminCheck(username: string) {
-    const response = await fetch('http://localhost:30631/auth/adminCheck/' + username, {
+    const response = await fetch('http://localhost:5000/auth/adminCheck/' + username, {
         method: "GET"
     })
 
