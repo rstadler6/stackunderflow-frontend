@@ -1,8 +1,10 @@
 import React, {FormEvent} from 'react';
+import { useHistory } from "react-router-dom";
 import {Post} from "../../Types/Post";
 import {createPost, isEmptyOrWhitespace} from "../../Api/Api";
 
 export default function CreatePost(props: { setLoaded: (loaded: boolean) => void }) {
+    const { history } = useHistory();
     let title: string;
     let content: string;
 
@@ -39,7 +41,7 @@ export default function CreatePost(props: { setLoaded: (loaded: boolean) => void
         try {
             const post = new Post(title, content);
             await createPost(post);
-            props.setLoaded(false);
+            history.push("localhost:3000/")
         } catch (e) {
             // @ts-ignore
             alert("Create post failed: " + e.message);
