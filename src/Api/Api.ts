@@ -30,8 +30,8 @@ export async function getPost(id: number) {
     return await response.json();
 }
 
-export /*async*/ function getPosts() {
-    /*const response = await fetch('http://localhost:8080/posts/', {
+export async function getPosts() {
+    const response = await fetch('http://localhost.fiddler:5000/posts/', {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
@@ -42,8 +42,7 @@ export /*async*/ function getPosts() {
         alert(response.statusText)
     }
 
-    return await response.json();*/
-    return [new Post("muck", "MUCK")]; // temp
+    return await response.json();
 }
 
 export async function votePost(id: number, value: number) {

@@ -34,7 +34,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
     }
 
     async function initPosts() {
-        setPosts(/*await*/ getPosts());
+        setPosts(await getPosts());
         props.setLoaded(true);
     }
 
