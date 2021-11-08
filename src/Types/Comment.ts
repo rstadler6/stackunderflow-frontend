@@ -1,7 +1,7 @@
 import {User} from "./User";
 
 export class Comment {
-    constructor(user: User, content: String) {
+    constructor(user: User, content: string) {
         this.user = user;
         this.content = content;
     }
@@ -9,5 +9,7 @@ export class Comment {
     id: number;
     upvotes: number;
     user: User;
-    content: String
+    content: string;
+    timestamp: Date;
+    accepted: boolean;
 }

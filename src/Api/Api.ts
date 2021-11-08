@@ -63,7 +63,22 @@ export async function getPosts() {
 export async function voteComment(id: number, value: number) {
     const response = await fetch('http://localhost:5000/posts/' + id + '/vote', {
         method: "POST",
-        body: JSON.stringify(id),
+        body: JSON.stringify({value: value}),
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
+}
+
+export async function acceptComment(postId: number, id: number) {
+    const response = await fetch('http://localhost:5000/posts/' + id + '/accept', {
+        method: "POST",
+        body: JSON.stringify({id: id}),
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
@@ -128,9 +143,9 @@ export async function deleteUser(username: string) {
 }
 
 export async function login(username: string, password: string) {
-    /*const response = await fetch('http://localhost:5000/auth/login', {
+    const response = await fetch('http://localhost.fiddler:5000/login', {
         method: "POST",
-        body: JSON.stringify(new User(username, password, false, false)),
+        body: JSON.stringify(new User(username, password)),
         headers: new Headers({'content-type': 'application/json'})
     })
 
@@ -139,15 +154,12 @@ export async function login(username: string, password: string) {
     }
 
     localStorage.setItem('jwt', await response.text());
-    await adminCheck(username);*/
-
-    localStorage.setItem('jwt', "123"); // temp
 }
 
 export async function register(username: string, password: string) {
-    const response = await fetch('http://localhost:5000/auth/register', {
+    const response = await fetch('http://localhost:5000/register', {
         method: "POST",
-        body: JSON.stringify(new User(username, password, false, false)),
+        body: JSON.stringify(new User(username, password)),
         headers: new Headers({'content-type': 'application/json'})
     })
 
@@ -156,19 +168,6 @@ export async function register(username: string, password: string) {
     }
 
     localStorage.setItem('jwt', await response.text());
-    await adminCheck(username);
-}
-
-export async function adminCheck(username: string) {
-    const response = await fetch('http://localhost:5000/auth/adminCheck/' + username, {
-        method: "GET"
-    })
-
-    if (!response.ok) {
-        throw new Error();
-    }
-
-    localStorage.setItem('admin', await response.text());
 }
 
 export function isEmptyOrWhitespace(str: string) {
