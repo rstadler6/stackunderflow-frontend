@@ -4,7 +4,7 @@ import {Post} from "../../Types/Post";
 import {createPost, isEmptyOrWhitespace} from "../../Api/Api";
 
 export default function CreatePost(props: { setLoaded: (loaded: boolean) => void }) {
-    const { history } = useHistory();
+    const history = useHistory();
     let title: string;
     let content: string;
 
@@ -41,7 +41,7 @@ export default function CreatePost(props: { setLoaded: (loaded: boolean) => void
         try {
             const post = new Post(title, content);
             await createPost(post);
-            history.push("localhost:3000/")
+            history.push("/")
         } catch (e) {
             // @ts-ignore
             alert("Create post failed: " + e.message);
