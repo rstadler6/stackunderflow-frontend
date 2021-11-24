@@ -14,4 +14,5 @@ export class Post {
     timestamp: Date;
     upvotes: Number;
     comments: Comment[];
+    acceptedComment: Comment
 }

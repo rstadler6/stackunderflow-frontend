@@ -1,6 +1,7 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import {Post} from "../../../Types/Post";
-import {acceptComment, commentPost, voteComment} from "../../../Api/Api";
+import {Comment} from "../../../Types/Comment";
+import {acceptComment, commentPost, getPost, voteComment} from "../../../Api/Api";
 
 export default function Comments(props: {post: Post}) {
     const [comments, setComments] = useState(props.post.comments);
@@ -14,7 +15,7 @@ export default function Comments(props: {post: Post}) {
     </div>)
 
     function showComments() {
-        return comments.map(comment => <div className={comment.accepted ? "accepted" : ""}>{comment.content} {comment.creator}
+        return comments.map(comment => <div className={comment === props.post.acceptedComment ? "accepted" : ""}>{comment.content} {comment.creator}
             <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {comment.upvotes} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
             <button onClick={e => acceptCommentEvent(e, props.post.id, comment.id)}>Accept Comment</button>
         </div>)
@@ -27,9 +28,8 @@ export default function Comments(props: {post: Post}) {
 
     async function commentEvent(e: React.MouseEvent) {
         try {
-            const post = await commentPost(props.post.id, new Comment(comment));
-            //setComments(post.comments);
-            //props.setLoaded(false);
+            const post: Post = await commentPost(props.post.id, new Comment(comment));
+            setComments(post.comments)
         } catch (e) {
             // @ts-ignore
             alert("Upvote post failed: " + e.message);

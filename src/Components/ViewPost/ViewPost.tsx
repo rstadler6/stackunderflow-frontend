@@ -11,7 +11,7 @@ export default function ViewPost() {
 
     useEffect(() => {
         initPost();
-    });
+    }, []);
 
     return (
         <div>

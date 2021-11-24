@@ -1,4 +1,5 @@
 import {User} from "../Types/User"
+import {Comment} from "../Types/Comment"
 import {Post} from "../Types/Post"
 
 export async function createPost(post: Post) {
@@ -17,7 +18,7 @@ export async function createPost(post: Post) {
 }
 
 export async function commentPost(id: number, comment: Comment) {
-    const response = await fetch('http://localhost.fiddler:5000/posts/' + id + '/comment', {
+    const response = await fetch('http://localhost:5000/posts/' + id + '/comment', {
         method: "POST",
         body: JSON.stringify(comment),
         headers: new Headers(
@@ -32,7 +33,7 @@ export async function commentPost(id: number, comment: Comment) {
 }
 
 export async function getPost(id: number) {
-    const response = await fetch('http://localhost.fiddler:5000/posts/' + id, {
+    const response = await fetch('http://localhost:5000/posts/' + id, {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
@@ -46,7 +47,7 @@ export async function getPost(id: number) {
 }
 
 export async function getPosts() {
-    const response = await fetch('http://localhost.fiddler:5000/posts/', {
+    const response = await fetch('http://localhost:5000/posts/', {
         method: "GET",
         headers: new Headers(
             {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
@@ -157,7 +158,7 @@ export async function deleteUser(username: string) {
 }
 
 export async function login(username: string, password: string) {
-    const response = await fetch('http://localhost.fiddler:5000/login', {
+    const response = await fetch('http://localhost:5000/login', {
         method: "POST",
         body: JSON.stringify(new User(username, password)),
         headers: new Headers({'content-type': 'application/json'})

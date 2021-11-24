@@ -1,8 +1,7 @@
 import {User} from "./User";
 
 export class Comment {
-    constructor(user: User, content: string) {
-        this.creator = user;
+    constructor(content: string) {
         this.content = content;
     }
 
@@ -11,5 +10,4 @@ export class Comment {
     creator: User;
     content: string;
     timestamp: Date;
-    accepted: boolean;
 }
