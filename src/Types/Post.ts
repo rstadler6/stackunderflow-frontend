@@ -8,7 +8,7 @@ export class Post {
     }
 
     id: number;
-    user: User;
+    creator: User;
     title: string;
     content: string;
     timestamp: Date;

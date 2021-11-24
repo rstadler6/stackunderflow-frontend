@@ -20,7 +20,7 @@ export default function ViewPost() {
     )
 
     function showPost() {
-        return (<div>{post.title} {post.content} {post.user}<Comments post={post}/></div>)
+        return (<div>{post.title} {post.content} {post.creator == undefined ? "User1" : post.creator}<Comments post={post}/></div>)
     }
 
     async function initPost() {

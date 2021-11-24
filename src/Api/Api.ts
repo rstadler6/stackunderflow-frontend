@@ -76,7 +76,7 @@ export async function voteComment(id: number, value: number) {
 }
 
 export async function acceptComment(postId: number, id: number) {
-    const response = await fetch('http://localhost:5000/posts/' + id + '/accept', {
+    const response = await fetch('http://localhost:5000/posts/' + id + 'comments/accept', {
         method: "POST",
         body: JSON.stringify({id: id}),
         headers: new Headers(

@@ -27,7 +27,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
                             <div className="card-body">
                                 <p className="card-title">{post.title}</p>
                                 <p className="card-text">{post.content}</p>
-                                <p className="card-text">{post.user}</p>
+                                <p className="card-text">{post.creator === null ? "User1" : post.creator.username}</p>
                                 <p className="card-text">{post.timestamp}</p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
                         <div className="card-body">
                             <p className="card-title">{post.title}</p>
                             <p className="card-text">{post.content}</p>
-                            <p className="card-text">{post.user}</p>
+                            <p className="card-text">{post.creator === null ? "User1" : post.creator.username}</p>
                             <p className="card-text">{post.timestamp}</p>
                         </div>
                     </div>

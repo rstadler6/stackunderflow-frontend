@@ -14,7 +14,7 @@ export default function Comments(props: {post: Post}) {
     </div>)
 
     function showComments() {
-        return comments.map(comment => <div className={comment.accepted ? "accepted" : ""}>{comment.content} {comment.user}
+        return comments.map(comment => <div className={comment.accepted ? "accepted" : ""}>{comment.content} {comment.creator}
             <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {comment.upvotes} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
             <button onClick={e => acceptCommentEvent(e, props.post.id, comment.id)}>Accept Comment</button>
         </div>)
@@ -47,7 +47,7 @@ export default function Comments(props: {post: Post}) {
             //props.setLoaded(false);
         } catch (e) {
             // @ts-ignore
-            alert("Upvote post failed: " + e.message);
+            alert("Upvote comment failed: " + e.message);
             return;
         }
     }
@@ -62,8 +62,10 @@ export default function Comments(props: {post: Post}) {
             //props.setLoaded(false);
         } catch (e) {
             // @ts-ignore
-            alert("Upvote post failed: " + e.message);
+            alert("Accept comment failed: " + e.message);
             return;
         }
     }
+
+
 }
