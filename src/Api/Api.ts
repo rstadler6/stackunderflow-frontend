@@ -75,6 +75,20 @@ export async function voteComment(id: number, value: number) {
     return await response.json();
 }
 
+export async function getCommentVotes(id: number) {
+    const response = await fetch('http://localhost:5000/posts/' + id + '/vote', {
+        method: "GET",
+        headers: new Headers(
+            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+
+    return await response.json();
+}
+
 export async function acceptComment(postId: number, id: number) {
     const response = await fetch('http://localhost:5000/posts/' + id + 'comments/accept', {
         method: "POST",
