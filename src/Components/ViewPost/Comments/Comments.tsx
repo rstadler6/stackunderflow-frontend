@@ -1,7 +1,7 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {Post} from "../../../Types/Post";
 import {Comment} from "../../../Types/Comment";
-import {acceptComment, commentPost, getPost, voteComment} from "../../../Api/Api";
+import {acceptComment, commentPost, getCommentVotes, getPost, voteComment} from "../../../Api/Api";
 
 export default function Comments(props: {post: Post}) {
     const [comments, setComments] = useState(props.post.comments);
@@ -16,7 +16,7 @@ export default function Comments(props: {post: Post}) {
 
     function showComments() {
         return comments.map(comment => <div className={comment === props.post.acceptedComment ? "accepted" : ""}>{comment.content} {comment.creator == null ? "User1" : comment.creator.username}
-            <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {comment.upvotes} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
+            <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {getCommentVotes(comment.id)} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
             <button onClick={e => acceptCommentEvent(e, props.post.id, comment.id)}>Accept Comment</button>
         </div>)
     }
