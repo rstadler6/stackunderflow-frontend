@@ -6,6 +6,11 @@ import {acceptComment, commentPost, getCommentVotes, getPost, voteComment} from 
 export default function Comments(props: {post: Post}) {
     const [comments, setComments] = useState(props.post.comments);
     const [comment, setComment] = useState('');
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        initVotes();
+    }, []);
 
     return (
     <div>
@@ -14,9 +19,17 @@ export default function Comments(props: {post: Post}) {
         <button onClick={commentEvent}>Comment</button>
     </div>)
 
+    async function initVotes() {
+        for (const comment of comments) {
+            comment.upvotes = await getCommentVotes(comment.id)
+        }
+
+        setLoaded(true)
+    }
+
     function showComments() {
         return comments.map(comment => <div className={comment === props.post.acceptedComment ? "accepted" : ""}>{comment.content} {comment.creator == null ? "User1" : comment.creator.username}
-            <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {getCommentVotes(comment.id)} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
+            <button onClick={e => voteEvent(e, comment.id, 1)}>upvote</button> {comment.upvotes} <button onClick={e => voteEvent(e, comment.id, -1)}>downvote</button>
             <button onClick={e => acceptCommentEvent(e, props.post.id, comment.id)}>Accept Comment</button>
         </div>)
     }
@@ -66,6 +79,4 @@ export default function Comments(props: {post: Post}) {
             return;
         }
     }
-
-
 }

@@ -5,7 +5,7 @@ import {createPost, getPosts, isEmptyOrWhitespace, register} from "../../Api/Api
 
 export default function PostList(props: { loaded: boolean, setLoaded: (loaded: boolean) => void }) {
     const [posts, setPosts] = useState<Post[]>([]);
-    const [sortAlphabetically, setSortAlphabetically] = useState(true);
+    const [sortAlphabetically, setSortAlphabetically] = useState(false);
 
     useEffect(() => {
         initPosts();
