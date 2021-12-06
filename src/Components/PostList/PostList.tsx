@@ -5,7 +5,7 @@ import {createPost, getPosts, isEmptyOrWhitespace, register} from "../../Api/Api
 
 export default function PostList(props: { loaded: boolean, setLoaded: (loaded: boolean) => void }) {
     const [posts, setPosts] = useState<Post[]>([]);
-    const [newestFirst, setNewestFirst] = useState(true);
+    const [sortAlphabetically, setSortAlphabetically] = useState(false);
 
     useEffect(() => {
         initPosts();
@@ -13,21 +13,21 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
 
     return (
         <ul>
-            <button onClick={sortEvent}>Reverse Sort</button>
+            <button onClick={sortEvent}>{sortAlphabetically ? "Disable" : "Enable"} Alphabetical Sort</button>
             {props.loaded ? showPosts() : "Loading..."}
         </ul>
     )
 
     function showPosts() {
-        if (!newestFirst) {
-            return posts.reverse().map(post =>
+        if (sortAlphabetically) {
+            return posts.sort((a, b) => a.title.localeCompare(b.title)).map(post =>
                 <li className="list-group-item">
                     <Link to={"/posts/" + post.id} type="button">
                         <div className="card">
                             <div className="card-body">
                                 <p className="card-title">{post.title}</p>
                                 <p className="card-text">{post.content}</p>
-                                <p className="card-text">{post.user}</p>
+                                <p className="card-text">{post.creator === null ? "User1" : post.creator.username}</p>
                                 <p className="card-text">{post.timestamp}</p>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
                         <div className="card-body">
                             <p className="card-title">{post.title}</p>
                             <p className="card-text">{post.content}</p>
-                            <p className="card-text">{post.user}</p>
+                            <p className="card-text">{post.creator === null ? "User1" : post.creator.username}</p>
                             <p className="card-text">{post.timestamp}</p>
                         </div>
                     </div>
@@ -56,6 +56,7 @@ export default function PostList(props: { loaded: boolean, setLoaded: (loaded: b
     }
 
     async function sortEvent(e: React.MouseEvent) {
-        setNewestFirst(!newestFirst);
+        setSortAlphabetically(!sortAlphabetically);
+        props.setLoaded(false);
     }
 }
