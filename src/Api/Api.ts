@@ -7,7 +7,7 @@ export async function createPost(post: Post) {
         method: "POST",
         body: JSON.stringify(post),
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -22,7 +22,7 @@ export async function commentPost(id: number, comment: Comment) {
         method: "POST",
         body: JSON.stringify(comment),
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -36,7 +36,7 @@ export async function getPost(id: number) {
     const response = await fetch('http://localhost:5000/posts/' + id, {
         method: "GET",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -50,7 +50,7 @@ export async function getPosts() {
     const response = await fetch('http://localhost:5000/posts/', {
         method: "GET",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+            {'token': localStorage.getItem("jwt"),
                 'content-type': 'application/json'})
     })
 
@@ -66,7 +66,7 @@ export async function voteComment(id: number, value: number) {
         method: "POST",
         body: JSON.stringify({value: value}),
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -80,7 +80,7 @@ export async function getCommentVotes(id: number) {
     const response = await fetch('http://localhost:5000/posts/' + id + '/vote', {
         method: "GET",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -94,7 +94,7 @@ export async function acceptComment(postId: number, id: number) {
     const response = await fetch('http://localhost:5000/posts/' + postId + '/comments/accept/' + id, {
         method: "GET",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"), 'content-type': 'application/json'})
+            {'token': localStorage.getItem("jwt"), 'content-type': 'application/json'})
     })
 
     if (!response.ok) {
@@ -108,7 +108,7 @@ export async function getUsers() {
     const response = await fetch('http://localhost:5000/users/', {
         method: "GET",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+            {'token': localStorage.getItem("jwt"),
                 'content-type': 'application/json'})
     })
 
@@ -147,7 +147,7 @@ export async function deleteUser(username: string) {
     const response = await fetch('http://localhost:5000/users/' + username, {
         method: "DELETE",
         headers: new Headers(
-            {'Authorization': 'Bearer ' + localStorage.getItem("jwt"),
+            {'token': localStorage.getItem("jwt"),
                 'content-type': 'application/json'})
     })
 
