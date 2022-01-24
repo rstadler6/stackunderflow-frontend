@@ -55,6 +55,7 @@ export async function getPosts() {
     })
 
     if (!response.ok) {
+        localStorage.clear();
         alert(response.statusText)
     }
 
