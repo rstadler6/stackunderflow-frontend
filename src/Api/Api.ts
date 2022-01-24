@@ -185,6 +185,19 @@ export async function register(username: string, password: string) {
     localStorage.setItem('jwt', await response.text());
 }
 
+export async function logout() {
+    const response = await fetch('http://localhost:5000/logout', {
+        method: "POST",
+        headers: new Headers(
+            {'token': localStorage.getItem("jwt"),
+                'content-type': 'application/json'})
+    })
+
+    if (!response.ok) {
+        alert(response.statusText)
+    }
+}
+
 export function isEmptyOrWhitespace(str: string) {
     return str === undefined || str === "" || str.match(/^ *$/) !== null;
 }
